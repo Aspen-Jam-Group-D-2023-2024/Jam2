@@ -24,8 +24,6 @@ public class Movement : MonoBehaviour
 
     Vector3 moveDirection = Vector3.zero;
     [HideInInspector] public float rotationX = 0;
-    [HideInInspector] public float rotationY = 0;
-    [HideInInspector] public Vector3 lookDir;
 
     public bool canMove = true;
 
@@ -77,15 +75,9 @@ public class Movement : MonoBehaviour
         if (canMove)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationY = Input.GetAxis("Mouse X") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, rotationY, 0);
-
-            lookDir = Quaternion.Euler(playerCamera.transform.localRotation.x, transform.rotation.y, 0f) * transform.forward;
-            
-            // debug line for look direction
-            Debug.DrawLine(transform.position, lookDir, Color.green, 1f);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
         #endregion

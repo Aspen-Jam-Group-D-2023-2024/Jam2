@@ -5,15 +5,18 @@ using UnityEngine;
 
 
 // THIS SCRIPT ASSUMES YOU HAVE A MOVEMENT SCRIPT ATTACHED TO THE PLAYER
+[RequireComponent(typeof(LineRenderer))]
 public class Grappler : MonoBehaviour
 {
     [Header("Grappling adjustments")] 
     [Tooltip("How far the grappler can shoot")] public float grappleRange = 5f;
     public KeyCode grappleKey;
-    public LayerMask grappleLayer;
-    public float jointSpringForce = 5f;
-    public float jointDamperForce = 0.5f;
-    public float jointMassScale = 1f;
+    public LayerMask whatIsGrappleable;
+    [Tooltip("The force that the joint uses to try to keep the two objects a certain distance away")] public float jointSpringForce = 4.5f;
+    [Tooltip("How strong the force to smooth out the spring force curve is")] public float jointDamperForce = 7f;
+    [Tooltip("How accurate the amount of forced applied to each object based on their mass is")] public float jointMassScale = 4.5f;
+    [Tooltip("How much the player gets pushed forward whenever they're grappling")] public float grappleForceModifier = 5f;
+    private Vector3 currentGrapplePosition;
 
     
     [Header("References")]
@@ -21,79 +24,82 @@ public class Grappler : MonoBehaviour
     [Tooltip("Player Transform")] public Transform player;
     public Transform playerCamera;
     [Tooltip("Line Renderer component to cast a visible line")] public LineRenderer lineRenderer;
-    private Movement mvment;
 
     private SpringJoint joint;
     private RaycastHit hit;  // stores hit info
     private Vector3 grapplePoint;
-    [HideInInspector] public bool grappling;  // public flag that denotes if we are currently trying to grapple
 
     private void Start()
     {
-        mvment = player.GetComponent<Movement>();
+        lineRenderer.positionCount = 0;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(grappleKey))
         {
-            grappling = true;
-        }
-        else
-        {
-            grappling = false;
-        }
-        
-        RenderLine();
-    }
-
-    private void FixedUpdate()
-    {
-        if (grappling)
-        {
             StartGrapple();
         }
-        else
+        else if (Input.GetKeyUp(grappleKey))
         {
             StopGrapple();
         }
     }
 
+    private void LateUpdate()
+    {
+        RenderLine();
+    }
+
+    // Code is from https://www.youtube.com/watch?v=Xgh4v1w5DxU
     private void StartGrapple()
     {
         // check raycast to see if grappleable object is in grapple range
-        if (Physics.Raycast(player.position, mvment.lookDir, out hit, grappleRange, grappleLayer))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, grappleRange, whatIsGrappleable))
         {
-            Debug.Log("Grappled!");
-            grapplePoint = hit.point;
+            Debug.Log("Grappler hit " + hit.transform.name + "!");
             
             // Grapple joint
+            grapplePoint = hit.point;
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = grapplePoint;
+            joint.anchor = player.position;
+            
+            float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
+            
+            // The distance grapple will try to keep from grapple point. 
+            joint.maxDistance = distanceFromPoint * 0.8f;
+            joint.minDistance = distanceFromPoint * 0.6f;
             
             // Joint modification code:
             joint.spring = jointSpringForce;
             joint.damper = jointDamperForce;
             joint.massScale = jointMassScale;
+
+            lineRenderer.positionCount = 2;
+            currentGrapplePosition = hookPoint.position;
         }
     }
 
     private void StopGrapple()
     {
+        lineRenderer.positionCount = 0;
         Destroy(joint);
     }
 
     private void RenderLine()
     {
-        if (grappling && joint)
-        {
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(1, hit.point);
-        }
-        else
-        {
-            lineRenderer.positionCount = 1;
-        }
+        // no joint, so don't draw the rope
+        if (!joint) return;
+        
+        // rope animation
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
+        
+        lineRenderer.SetPosition(0, hookPoint.position);
+        lineRenderer.SetPosition(1, currentGrapplePosition);
+        
+        // push forward with force
+        player.GetComponent<Rigidbody>().AddForce(player.forward * grappleForceModifier, ForceMode.Impulse);
     }
 }
