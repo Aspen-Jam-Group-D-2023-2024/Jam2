@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
 
 
     Vector3 moveDirection = Vector3.zero;
-    [HideInInspector] public float rotationX = 0;
+    float rotationX = 0;
 
     public bool canMove = true;
 
