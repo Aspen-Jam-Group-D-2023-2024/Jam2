@@ -4,37 +4,58 @@ using UnityEngine;
 
 public class Dash : MonoBehaviour
 {
-    public float distance;
-    Rigidbody rig;
-    private bool dashing = true;
+    [Header("Refrences")]
+    public Transform orientation;
+    public Transform playerCam;
+    private Rigidbody rb;
+    private PlayerController pm;
 
-    public float dashCooldown;
-    
-    // Start is called before the first frame update
-    void Start()
+    [Header("Dashing")]
+    public float dashForce;
+    public float dashUpwardForce;
+    public float dashDuration;
+
+    [Header("Cooldown")]
+    public float dashCd;
+    private float dashCdTimer;
+
+    [Header("Input")]
+    public KeyCode dashKey = KeyCode.Q;
+
+
+    private void Start()
     {
-        rig = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        pm = GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-  
-
-        if(Input.GetKeyDown(KeyCode.Q) && dashing)
+        if(Input.GetKeyDown(dashKey))
         {
-            StartCoroutine(dash());
+            Dashing();
         }
 
+        if(dashCdTimer > 0)
+        {
+            dashCdTimer -= Time.deltaTime;
+        }
     }
 
-    private IEnumerator dash()
+    private void Dashing()
     {
-        rig.AddForce(transform.forward * distance, ForceMode.Impulse);
-        dashing = false;
 
-        yield return new WaitForSeconds(dashCooldown);
-        dashing = true;
+        if (dashCdTimer > 0) return;
+        else dashCdTimer = dashCd;
+
+        Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        rb.AddForce(forceToApply, ForceMode.Impulse);
+        Invoke(nameof(ResetDash), dashDuration);
     }
-    
+
+
+    private void ResetDash()
+    {
+
+    }
 }

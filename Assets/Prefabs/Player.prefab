@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 1915142086877504813}
   - component: {fileID: 5420874441657362576}
   - component: {fileID: 3913879712042249867}
+  - component: {fileID: 2951043397267588810}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -232,13 +233,32 @@ MonoBehaviour:
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   maxSlopeAngle: 45
   orientation: {fileID: 5696806367755408171}
   horizontalInput: 0
   verticalInput: 0
   sliding: 0
   state: 0
+--- !u!114 &2951043397267588810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868501573103119811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0609907fe8b43fa85f5168c6553fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 5696806367755408171}
+  playerCam: {fileID: 4665167838431555301}
+  dashForce: 300
+  dashUpwardForce: 0
+  dashDuration: 0.25
+  dashCd: 1.5
+  dashKey: 113
 --- !u!1 &7612735182140262430
 GameObject:
   m_ObjectHideFlags: 0
