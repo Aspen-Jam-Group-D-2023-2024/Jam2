@@ -17,7 +17,6 @@ public class Grappler : MonoBehaviour
     [Tooltip("How accurate the amount of forced applied to each object based on their mass is")] public float jointMassScale = 4.5f;
     [Tooltip("How much the player gets pushed forward whenever they're grappling")] public float grappleForceModifier = 5f;
     private Vector3 currentGrapplePosition;
-    // public float jointTolerance = 1f;
 
     
     [Header("References")]
@@ -46,7 +45,7 @@ public class Grappler : MonoBehaviour
             StopGrapple();
         }
         
-        // PushPlayer();
+        PushPlayer();
     }
 
     private void LateUpdate()
@@ -70,12 +69,10 @@ public class Grappler : MonoBehaviour
             joint.anchor = player.position;
             
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-            Debug.Log(player.position + " " + grapplePoint + " " + distanceFromPoint);
             
             // The distance grapple will try to keep from grapple point. 
-            joint.maxDistance = distanceFromPoint * 0.3f;
-            joint.minDistance = 0.5f;
-
+            joint.maxDistance = distanceFromPoint;
+            joint.minDistance = distanceFromPoint;
             
             // Joint modification code:
             joint.spring = jointSpringForce;
@@ -99,7 +96,6 @@ public class Grappler : MonoBehaviour
         
         // push forward with force
         player.GetComponent<Rigidbody>().AddForce(playerCamera.forward * grappleForceModifier * Time.deltaTime, ForceMode.Impulse);
-        Debug.DrawRay(player.position, playerCamera.forward, Color.cyan, 0.5f);
     }
 
     private void RenderLine()
