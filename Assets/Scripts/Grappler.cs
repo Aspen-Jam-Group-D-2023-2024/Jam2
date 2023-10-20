@@ -25,6 +25,8 @@ public class Grappler : MonoBehaviour
     public Transform playerCamera;
     [Tooltip("Line Renderer component to cast a visible line")] public LineRenderer lineRenderer;
 
+    private AudioManager am;
+
     private SpringJoint joint;
     private RaycastHit hit;  // stores hit info
     private Vector3 grapplePoint;
@@ -32,13 +34,15 @@ public class Grappler : MonoBehaviour
     private void Start()
     {
         lineRenderer.positionCount = 0;
+
+        am = GameObject.Find("AudioSources").GetComponent<AudioManager>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(grappleKey))
         {
-            StartGrapple();
+            StartCoroutine(StartGrapple());
         }
         else if (Input.GetKeyUp(grappleKey))
         {
@@ -54,7 +58,7 @@ public class Grappler : MonoBehaviour
     }
 
     // Code is from https://www.youtube.com/watch?v=Xgh4v1w5DxU
-    private void StartGrapple()
+    private IEnumerator StartGrapple()
     {
         // check raycast to see if grappleable object is in grapple range
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, grappleRange, whatIsGrappleable))
@@ -71,8 +75,8 @@ public class Grappler : MonoBehaviour
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
             
             // The distance grapple will try to keep from grapple point. 
-            joint.maxDistance = distanceFromPoint;
-            joint.minDistance = distanceFromPoint;
+            joint.maxDistance = distanceFromPoint * 0.8f;
+            joint.minDistance = distanceFromPoint * 0.25f;
             
             // Joint modification code:
             joint.spring = jointSpringForce;
@@ -81,6 +85,12 @@ public class Grappler : MonoBehaviour
 
             lineRenderer.positionCount = 2;
             currentGrapplePosition = hookPoint.position;
+
+            am.grappleSound.Play();
+            
+            yield return new WaitForSeconds(0.75f);
+            
+            am.grappleAttachSound.Play();
         }
     }
 

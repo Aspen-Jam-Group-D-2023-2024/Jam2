@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 // throw this on the player

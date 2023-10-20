@@ -27,11 +27,14 @@ public class Movement : MonoBehaviour
 
     public bool canMove = true;
 
+    private AudioManager am;
+
 
     CharacterController characterController;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        am = GameObject.Find("AudioSources").GetComponent<AudioManager>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -50,12 +53,22 @@ public class Movement : MonoBehaviour
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
+        if (isRunning)
+        {
+            am.walkSound.Play();
+        }
+        else
+        {
+            am.runSound.Play();
+        }
+
         #endregion
 
         #region Handles Jumping
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpPower;
+            am.jumpSound.Play();
         }
         else
         {

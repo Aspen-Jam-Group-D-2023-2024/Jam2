@@ -22,11 +22,14 @@ public class Dash : MonoBehaviour
     [Header("Input")]
     public KeyCode dashKey = KeyCode.Q;
 
+    private AudioManager am;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerController>();
+        am = GameObject.Find("AudioSources").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -52,6 +55,8 @@ public class Dash : MonoBehaviour
         Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
         rb.AddForce(forceToApply, ForceMode.Impulse);
         Invoke(nameof(ResetDash), dashDuration);
+        
+        am.teleportSound.Play();
     }
 
     private void ResetDash()
