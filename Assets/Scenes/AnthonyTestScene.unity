@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 976462349}
   - component: {fileID: 976462348}
   - component: {fileID: 976462347}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grapple Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 1360102525}
   - component: {fileID: 1360102524}
   - component: {fileID: 1360102528}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grapple Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1596,7 +1596,7 @@ GameObject:
   - component: {fileID: 1670492641}
   - component: {fileID: 1670492640}
   - component: {fileID: 1670492639}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grapple Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1960,7 +1960,7 @@ GameObject:
   - component: {fileID: 1884481993}
   - component: {fileID: 1884481992}
   - component: {fileID: 1884481991}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grapple Wall (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2093,7 +2093,7 @@ GameObject:
   - component: {fileID: 1930965808}
   - component: {fileID: 1930965807}
   - component: {fileID: 1930965806}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grapple Wall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2312,7 +2312,7 @@ GameObject:
   - component: {fileID: 2135803951}
   - component: {fileID: 2135803950}
   - component: {fileID: 2135803949}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grapple Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
