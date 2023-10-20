@@ -686,29 +686,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToBreak: 2
---- !u!1 &889090285 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 350134758761261273, guid: 2aee54e3e0b57ea479dce5b26bf012fe, type: 3}
-  m_PrefabInstance: {fileID: 1923696561}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &889090286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1121463487580287587, guid: 2aee54e3e0b57ea479dce5b26bf012fe, type: 3}
   m_PrefabInstance: {fileID: 1923696561}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &889090287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889090285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6299d937b63e9ed4098387471d0d59b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToBreak: 2
 --- !u!4 &953349104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1121463487580287587, guid: 2aee54e3e0b57ea479dce5b26bf012fe, type: 3}
@@ -1712,6 +1694,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 804732121032715838, guid: 82a43f6af7b71524ab0f929f838c4408, type: 3}
+      propertyPath: distanceToKeep
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 804732121032715838, guid: 82a43f6af7b71524ab0f929f838c4408, type: 3}
       propertyPath: jointSpringForce
       value: 10
       objectReference: {fileID: 0}
@@ -2045,10 +2031,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 350134758761261273, guid: 2aee54e3e0b57ea479dce5b26bf012fe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 889090287}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aee54e3e0b57ea479dce5b26bf012fe, type: 3}
 --- !u!1 &1930965804
 GameObject:
