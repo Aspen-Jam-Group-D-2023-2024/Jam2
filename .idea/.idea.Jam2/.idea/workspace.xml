@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c8cdf6c-ab59-4e0f-891b-be85db656d33" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/AnthonyTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/AnthonyTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Jam2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Jam2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BreakableFloor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BreakableFloor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grappler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grappler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +106,7 @@
       <workItem from="1697601524290" duration="708000" />
       <workItem from="1697602628528" duration="3549000" />
       <workItem from="1697685265833" duration="120000" />
-      <workItem from="1697823852959" duration="457000" />
+      <workItem from="1697823852959" duration="2230000" />
     </task>
     <servers />
   </component>

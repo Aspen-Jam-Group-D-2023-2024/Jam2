@@ -6,7 +6,7 @@ using UnityEngine;
 public class BreakableFloor : MonoBehaviour
 {
     [Header("Timer")] 
-    [Tooltip("The time to break the floor from the time it is touched by the player, in seconds")] public float timeToBreak = 4f;
+    [Tooltip("The time to break the floor from the time it is touched by the player, in seconds")] public float timeToBreak = 2f;
 
     private void OnCollisionEnter(Collision other)
     {

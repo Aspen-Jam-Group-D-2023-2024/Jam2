@@ -44,6 +44,8 @@ public class Grappler : MonoBehaviour
         {
             StopGrapple();
         }
+        
+        PushPlayer();
     }
 
     private void LateUpdate()
@@ -69,8 +71,8 @@ public class Grappler : MonoBehaviour
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
             
             // The distance grapple will try to keep from grapple point. 
-            joint.maxDistance = distanceFromPoint * 0.8f;
-            joint.minDistance = distanceFromPoint * 0.6f;
+            joint.maxDistance = distanceFromPoint;
+            joint.minDistance = distanceFromPoint;
             
             // Joint modification code:
             joint.spring = jointSpringForce;
@@ -88,6 +90,14 @@ public class Grappler : MonoBehaviour
         Destroy(joint);
     }
 
+    private void PushPlayer()
+    {
+        if (!joint) return;
+        
+        // push forward with force
+        player.GetComponent<Rigidbody>().AddForce(playerCamera.forward * grappleForceModifier * Time.deltaTime, ForceMode.Impulse);
+    }
+
     private void RenderLine()
     {
         // no joint, so don't draw the rope
@@ -98,8 +108,5 @@ public class Grappler : MonoBehaviour
         
         lineRenderer.SetPosition(0, hookPoint.position);
         lineRenderer.SetPosition(1, currentGrapplePosition);
-        
-        // push forward with force
-        player.GetComponent<Rigidbody>().AddForce(player.forward * grappleForceModifier, ForceMode.Impulse);
     }
 }
