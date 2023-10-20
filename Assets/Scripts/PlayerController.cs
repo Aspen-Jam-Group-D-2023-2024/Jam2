@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
     public float maxSlopeAngle;
     RaycastHit slopeHit;
     bool exitingSlope;
-
+    
     [Header("Others")] public Transform orientation;
 
     [HideInInspector] public float horizontalInput;
@@ -53,7 +54,8 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
-
+    private AudioManager am;
+    
     public enum MovementState {
         walking,
         sprinting,
@@ -70,6 +72,7 @@ public class PlayerController : MonoBehaviour
         // get rigidbody
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        am = GameObject.Find("AudioSources").GetComponent<AudioManager>();
 
         readyToJump = true;
 
@@ -114,6 +117,12 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        // walk sound
+        if (horizontalInput < -0.1f || horizontalInput > 0.1f || verticalInput < -0.1f || verticalInput > 0.1f && grounded)
+        {
+            am.walkSound.Play();
+        }
+        
         // when to jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
@@ -279,6 +288,7 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
+        am.jumpSound.Play();
     }
 
     void ResetJump()
