@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3201219437596382568}
   - component: {fileID: 4431834286107699245}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,6 +326,8 @@ GameObject:
   - component: {fileID: 1915142086877504813}
   - component: {fileID: 5420874441657362576}
   - component: {fileID: 3913879712042249867}
+  - component: {fileID: 2832090798770019942}
+  - component: {fileID: 1136555568536108185}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -417,6 +419,38 @@ MonoBehaviour:
   verticalInput: 0
   sliding: 0
   state: 0
+--- !u!114 &2832090798770019942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868501573103119811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c5ace22f04c8f24ebe22a0e9ac785da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyToPress: 116
+--- !u!114 &1136555568536108185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868501573103119811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0609907fe8b43fa85f5168c6553fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1915142086877504813}
+  playerCam: {fileID: 4665167838431555301}
+  dashForce: 200
+  dashUpwardForce: 5
+  dashDuration: 1
+  dashCd: 0.5
+  dashKey: 113
 --- !u!1 &7612735182140262430
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,15 +657,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c4b763e5ae1ec49b6bbd84fa39b990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grappleRange: 20
+  grappleRange: 15
   grappleKey: 101
   whatIsGrappleable:
     serializedVersion: 2
-    m_Bits: 1024
-  jointSpringForce: 4.5
-  jointDamperForce: 7
+    m_Bits: 1536
+  jointSpringForce: 10
+  jointDamperForce: 8
   jointMassScale: 4.5
-  grappleForceModifier: 1
+  grappleForceModifier: 2
+  jointTolerance: 10
   hookPoint: {fileID: 6306728473693630863}
   player: {fileID: 1915142086877504813}
   playerCamera: {fileID: 4665167838431555301}
